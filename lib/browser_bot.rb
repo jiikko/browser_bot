@@ -1,7 +1,5 @@
 require 'yaml'
 require 'capybara/dsl'
-require 'selenium-webdriver'
-require 'jobs/wantedly/click_support_link'
 
 module BrowsserBot
   CONDFIG_PATH = 'config.yml'
@@ -12,6 +10,7 @@ module BrowsserBot
     load_config
     case job_name
     when 'wantedly_click_support_link'
+      require 'browser_bot/job/wantedly/click_support_link'
       BrowsserBot::Wantedly::ClickSupportLink.new(self).run
     else
       puts 'not found job_name'
@@ -30,3 +29,4 @@ module BrowsserBot
     end
   end
 end
+

@@ -1,4 +1,4 @@
-class BrowsserBot::Wantedly::ClickSupportLink
+class BrowsserBot::Job::Wantedly::ClickSupportLink
   def initialize(browser_bot)
     @config = browser_bot.config
   end
