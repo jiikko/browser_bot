@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+if ARGS[0].empty?
+  puts 'USAGE: bin/run #{job_name}'
+  exit 1
+end
+
+BrowsserBot.run(ARGS[0])
+exit 0
