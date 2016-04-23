@@ -1,4 +1,4 @@
 wantedly:
   email: xxx
   password: xxx
-  projects_url: xxx
+  projects_path: '/companies/xxx/projects'

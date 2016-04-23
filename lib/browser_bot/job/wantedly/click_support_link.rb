@@ -33,9 +33,13 @@ module BrowsserBot
         end
 
         def project_element
-          # エレメントnot foundになって監視がめんどいので都度visit
-          visit url('/companies/actindi/projects')
-          all('.project-support-link').first
+          # タイミングでエレメントnot foundになって監視がめんどいので都度visit
+          visit url(@config['wantedly']['projects_path'])
+          all(support_link_selector).first
+        end
+
+        def support_link_selector
+          'a.project-support-link'
         end
       end
     end
