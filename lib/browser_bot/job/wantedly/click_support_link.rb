@@ -1,24 +1,43 @@
-class BrowsserBot::Job::Wantedly::ClickSupportLink
-  def initialize(browser_bot)
-    @config = browser_bot.config
-  end
+module BrowsserBot
+  module Job
+    module Wantedly
+      class ClickSupportLink
+        include Capybara::DSL
 
-  def run
-    project_elements.each do |project_element|
-      Project.new(project_element).click_support_link
-    end
-  end
+        PROTCOL = 'https'
+        HOST = 'www.wantedly.com'
 
-  private
+        def initialize(config)
+          @config = config
+        end
 
-  def project_elements
-  end
+        def run
+          login!
+          while project_element do
+            project_element.click
+            click_button('応援する')
+          end
+        end
 
-  class Project
-    def initialize(project_element)
-    end
+        private
 
-    def click_support_link
+        def login!
+          visit url('/user/sign_in')
+          fill_in 'user_email', with: @config['wantedly']['email']
+          fill_in 'user_password', with: @config['wantedly']['password']
+          click_button('ログイン')
+        end
+
+        def url(path=nil)
+          "#{PROTCOL}://#{HOST}#{path if path}"
+        end
+
+        def project_element
+          # エレメントnot foundになって監視がめんどいので都度visit
+          visit url('/companies/actindi/projects')
+          all('.project-support-link').first
+        end
+      end
     end
   end
 end
