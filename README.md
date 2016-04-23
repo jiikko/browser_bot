@@ -21,8 +21,8 @@ for headless.
 $ bin/run --help
 Usage: run [options]
         --headless
-        --j=job_name
-        --c=config_path
+        --j #{job_name}
+        --c #{config_path}
 ```
 
 ## job list
