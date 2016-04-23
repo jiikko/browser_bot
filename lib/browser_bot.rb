@@ -1,5 +1,4 @@
 require 'yaml'
-require 'selenium-webdriver'
 require 'capybara/dsl'
 require 'pry'
 
@@ -31,10 +30,12 @@ module BrowsserBot
   end
 
   def self.browser_init
-    browser_name = :ff
+    browser_name = :chrome
     Capybara.run_server = false
     Capybara.register_driver(browser_name) do |app|
-      Capybara::Selenium::Driver.new(app, {})
+      Capybara::Selenium::Driver.new(app, {
+        browser: browser_name,
+      })
     end
     Capybara.current_driver = browser_name
     Capybara.reset_sessions!
