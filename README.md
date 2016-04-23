@@ -24,6 +24,9 @@ Usage: run [options]
         --j #{job_name}
         --c #{config_path}
 ```
+```
+bin/run -j wantedly_click_support_link --headless
+```
 
 ## job list
 * wantedly_click_support_link
