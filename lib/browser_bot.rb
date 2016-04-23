@@ -33,8 +33,14 @@ module BrowsserBot
   def self.browser_init(headless)
     if headless
       require 'capybara/poltergeist'
+      # https://github.com/teampoltergeist/poltergeist
       Capybara.javascript_driver = :poltergeist
       Capybara.current_driver = :poltergeist
+      Capybara.register_driver :poltergeist do |app|
+        Capybara::Poltergeist::Driver.new(app, {
+          js_errors: false,
+        })
+      end
     else
       browser_name = :chrome
       Capybara.run_server = false

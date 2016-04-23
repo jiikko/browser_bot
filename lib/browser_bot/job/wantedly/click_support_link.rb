@@ -43,7 +43,7 @@ module BrowsserBot
         end
 
         def support_link_selector
-          'a.project-support-link'
+          '.project-support-link'
         end
       end
     end
