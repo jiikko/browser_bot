@@ -8,6 +8,10 @@ module BrowsserBot
         HOST = 'www.wantedly.com'
 
         def initialize(config)
+          unless config['wantedly']
+            puts 'not found wantedly key from config.yml'
+            exit 1
+          end
           @config = config
         end
 
@@ -15,7 +19,7 @@ module BrowsserBot
           login!
           while project_element do
             project_element.click
-            click_button('応援する')
+            click_button('応援する') && puts('clicked')
           end
         end
 
