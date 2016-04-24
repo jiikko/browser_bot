@@ -1,22 +1,8 @@
 #!/usr/bin/env ruby
 
 # http://docs.ruby-lang.org/ja/2.2.0/library/optparse.html
-require 'optparse'
-params = ARGV.getopts('', 'headless', 'j:', "c:")
-
-if params['j'].nil?
-  puts <<-USAGE
-Usage: bin/run [options]
-    --headless
-    --j job_name
-    --c config_file
-      default: ./config.yml
-  USAGE
-  exit 1
-end
-
 $:.unshift('./lib')
 
 require 'browser_bot'
-BrowsserBot.run(params)
+BrowsserBot.run
 exit 0
