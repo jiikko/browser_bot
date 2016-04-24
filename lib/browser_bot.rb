@@ -6,7 +6,7 @@ module BrowsserBot
   CONDFIG_FILE = 'config.yml'
 
   def self.run(params)
-    load_config(params)
+    load_config(params['config_file'])
     case params['j']
     when 'wantedly_click_support_link'
       require 'browser_bot/job/wantedly/click_support_link'
@@ -20,8 +20,8 @@ module BrowsserBot
 
   private
 
-  def self.load_config(params)
-    config_file = params['config_file'] || CONDFIG_FILE
+  def self.load_config(arg_config_file)
+    config_file = arg_config_file || File.join(File.expand_path('../../', __FILE__), CONDFIG_FILE)
     if File.exists?(config_file)
       @config = YAML.load_file(config_file)
     else

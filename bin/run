@@ -15,8 +15,7 @@ Usage: bin/run [options]
   exit 1
 end
 
-$:.unshift('./lib')
-
+$:.unshift(File.expand_path('../../lib', __FILE__))
 require 'browser_bot'
 BrowsserBot.run(params)
 exit 0
