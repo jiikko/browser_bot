@@ -34,19 +34,22 @@ module BrowsserBot
     if headless
       require 'capybara/poltergeist'
       # https://github.com/teampoltergeist/poltergeist
-      Capybara.javascript_driver = :poltergeist
-      Capybara.current_driver = :poltergeist
       Capybara.register_driver :poltergeist do |app|
         Capybara::Poltergeist::Driver.new(app, {
           js_errors: false,
+          timeout: 120,
         })
       end
+      Capybara.javascript_driver = :poltergeist
+      Capybara.current_driver = :poltergeist
+      extend Capybara::DSL
+      page.driver.headers = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', }
     else
-      browser_name = :chrome
+      browser_name = :firefox
       Capybara.run_server = false
       Capybara.register_driver(browser_name) do |app|
         Capybara::Selenium::Driver.new(app, {
-          browser: browser_name, # run firefox if blank or :firefox
+          browser: browser_name,
         })
       end
       Capybara.current_driver = browser_name
